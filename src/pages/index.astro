@@ -1,59 +1,85 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+// Úvodní stránka: hero banner, doporučené kurzy a přehled kategorií.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import CourseCard from '../components/CourseCard.astro';
+import Hero from '../components/Hero.astro';
+import courseData from '../data/courses.json';
+
+const { courses, categories } = courseData;
+
+// Pomocná funkce: id kategorie -> její název
+const categoryName = (id: string) => categories.find((category) => category.id === id)?.name ?? id;
+
+const featuredCourses = courses.filter((course) => course.featured);
+const totalHours = courses.reduce((sum, course) => sum + course.duration, 0);
+const lecturers = new Set(courses.map((course) => course.lecturer)).size;
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to
-				build a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your{' '}
-				<code>astro.config.mjs</code> file. You can customize your setup with{' '}
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like
-				Tailwind, React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>
-					Edit this page in <code>src/pages/index.astro</code>
-				</li>
-				<li>
-					Edit the site header items in <code>src/components/Header.astro</code>
-				</li>
-				<li>
-					Add your name to the footer in <code>src/components/Footer.astro</code>
-				</li>
-				<li>
-					Check out the included blog posts in <code>src/content/blog/</code>
-				</li>
-				<li>
-					Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code>
-				</li>
+<BaseLayout>
+	<Hero
+		variant="large"
+		eyebrow="Katalog kurzů"
+		title="Naučte se tvořit web, programovat a pracovat s daty"
+		text="Vyberte si z kurzů pro začátečníky i pokročilé. Online, prezenčně nebo kombinovaně, vždy s lektorem, který vám pomůže."
+	>
+		<Fragment slot="actions">
+			<Button href="/kurzy/">Prohlédnout kurzy</Button>
+			<Button href="/faq/" variant="secondary">Jak výuka probíhá</Button>
+		</Fragment>
+		<ul class="hero__stats" role="list" slot="aside">
+			<li class="hero__stat">
+				<span class="hero__stat-value">{courses.length}</span>
+				<span class="hero__stat-label">kurzů</span>
+			</li>
+			<li class="hero__stat">
+				<span class="hero__stat-value">{totalHours}</span>
+				<span class="hero__stat-label">hodin výuky</span>
+			</li>
+			<li class="hero__stat">
+				<span class="hero__stat-value">{lecturers}</span>
+				<span class="hero__stat-label">lektorů</span>
+			</li>
+		</ul>
+	</Hero>
+
+	<section class="section" aria-labelledby="featured-title">
+		<div class="container">
+			<header class="section__header">
+				<h2 class="section__title" id="featured-title">Doporučené kurzy</h2>
+				<a href="/kurzy/">Všechny kurzy →</a>
+			</header>
+			<div class="course-grid course-grid--featured">
+				{
+					featuredCourses.map((course) => (
+						<CourseCard course={course} categoryName={categoryName(course.category)} featured />
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="section section--alt" aria-labelledby="categories-title">
+		<div class="container">
+			<header class="section__header">
+				<h2 class="section__title" id="categories-title">Kategorie</h2>
+			</header>
+			<ul class="course-grid" role="list">
+				{
+					categories.map((category) => {
+						const count = courses.filter((course) => course.category === category.id).length;
+						return (
+							<li class="info-box">
+								<h3>{category.name}</h3>
+								<p class="text-muted">{count} {count === 1 ? 'kurz' : count < 5 ? 'kurzy' : 'kurzů'}</p>
+								<Button href={`/kurzy/?kategorie=${category.id}`} variant="ghost" size="small">
+									Zobrazit kurzy
+								</Button>
+							</li>
+						);
+					})
+				}
 			</ul>
-			<p>
-				Have fun! If you get stuck, remember to{' '}
-				<a href="https://docs.astro.build/">read the docs</a> or{' '}
-				<a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out{' '}
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a> by{' '}
-				<a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+		</div>
+	</section>
+</BaseLayout>

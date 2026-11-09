@@ -1,0 +1,211 @@
+{
+  "categories": [
+    {
+      "id": "web",
+      "name": "Webový vývoj"
+    },
+    {
+      "id": "programovani",
+      "name": "Programování"
+    },
+    {
+      "id": "design",
+      "name": "Design a UX"
+    },
+    {
+      "id": "data",
+      "name": "Data a databáze"
+    }
+  ],
+  "courses": [
+    {
+      "slug": "html-css-zaklady",
+      "title": "HTML a CSS od nuly",
+      "category": "web",
+      "level": "beginner",
+      "format": "online",
+      "duration": 24,
+      "lessons": 12,
+      "price": 2490,
+      "lecturer": "Jana Nováková",
+      "image": "web.jpg",
+      "featured": true,
+      "perex": "Naučte se postavit první webovou stránku se sémantickým HTML a moderním CSS.",
+      "description": "Kurz vás provede základy tvorby webu. Začneme strukturou dokumentu a sémantickými značkami, pokračujeme Box Modelem, Flexboxem a Gridem a skončíme hotovou responzivní stránkou, kterou si můžete dát do portfolia.",
+      "topics": [
+        "Sémantické HTML5 značky",
+        "CSS Box Model a reset stylů",
+        "Rozvržení pomocí Flexboxu a Gridu",
+        "Responzivní design Mobile-First"
+      ]
+    },
+    {
+      "slug": "javascript-pro-zacatecniky",
+      "title": "JavaScript pro začátečníky",
+      "category": "programovani",
+      "level": "beginner",
+      "format": "online",
+      "duration": 30,
+      "lessons": 15,
+      "price": 2990,
+      "lecturer": "Petr Svoboda",
+      "image": "programovani.jpg",
+      "featured": true,
+      "perex": "Proměnné, funkce, události a práce s DOM. Oživte své stránky vlastním kódem.",
+      "description": "Praktický úvod do jazyka JavaScript. Každá lekce končí malým úkolem, takže si vše hned vyzkoušíte. Na konci kurzu naprogramujete interaktivní kvíz, který běží přímo v prohlížeči.",
+      "topics": [
+        "Proměnné, podmínky a cykly",
+        "Funkce a pole",
+        "Práce s DOM a událostmi",
+        "Ukládání dat do localStorage"
+      ]
+    },
+    {
+      "slug": "astro-staticke-weby",
+      "title": "Statické weby v Astru",
+      "category": "web",
+      "level": "intermediate",
+      "format": "kombinovaně",
+      "duration": 20,
+      "lessons": 10,
+      "price": 3490,
+      "lecturer": "Jana Nováková",
+      "image": "web.jpg",
+      "featured": true,
+      "perex": "Skládejte rychlé weby z komponent a generujte je z JSON dat.",
+      "description": "Kurz pro ty, kdo už znají HTML a CSS a chtějí pracovat efektivněji. Ukážeme si komponenty, layouty, props a sloty v Astru, napojíme data z JSON souborů a připravíme produkční build.",
+      "topics": [
+        "Struktura Astro projektu",
+        "Komponenty, props a sloty",
+        "Generování stránek z JSON dat",
+        "SEO meta tagy a produkční build"
+      ]
+    },
+    {
+      "slug": "python-zaklady",
+      "title": "Python: první kroky",
+      "category": "programovani",
+      "level": "beginner",
+      "format": "prezenčně",
+      "duration": 32,
+      "lessons": 16,
+      "price": 3290,
+      "lecturer": "Tomáš Dvořák",
+      "image": "programovani.jpg",
+      "featured": false,
+      "perex": "Srozumitelný jazyk, se kterým zvládnete automatizovat nudnou práci.",
+      "description": "Python je ideální první programovací jazyk. Naučíte se jeho syntaxi, práci se soubory a knihovnami a na konci si napíšete skript, který za vás zpracuje tabulku s daty.",
+      "topics": [
+        "Syntaxe a datové typy",
+        "Funkce a moduly",
+        "Práce se soubory",
+        "Úvod do knihoven"
+      ]
+    },
+    {
+      "slug": "ux-design-zaklady",
+      "title": "Základy UX designu",
+      "category": "design",
+      "level": "beginner",
+      "format": "online",
+      "duration": 16,
+      "lessons": 8,
+      "price": 2290,
+      "lecturer": "Lucie Černá",
+      "image": "design.jpg",
+      "featured": false,
+      "perex": "Jak navrhnout web, kterému uživatelé rozumí na první pohled.",
+      "description": "Seznámíte se s procesem návrhu uživatelského rozhraní od výzkumu přes drátěné modely až po testování s uživateli. Kurz nevyžaduje žádné předchozí znalosti.",
+      "topics": [
+        "Uživatelský výzkum a persony",
+        "Informační architektura",
+        "Drátěné modely (wireframes)",
+        "Testování použitelnosti"
+      ]
+    },
+    {
+      "slug": "pristupnost-webu",
+      "title": "Přístupnost webu v praxi",
+      "category": "design",
+      "level": "intermediate",
+      "format": "online",
+      "duration": 12,
+      "lessons": 6,
+      "price": 1990,
+      "lecturer": "Lucie Černá",
+      "image": "design.jpg",
+      "featured": false,
+      "perex": "Web pro všechny: klávesnice, čtečky obrazovky, kontrast a ARIA.",
+      "description": "Kurz ukazuje, jak tvořit weby použitelné i pro lidi se zdravotním omezením. Projdeme pravidla WCAG, správné použití ARIA atributů a otestujeme web pomocí klávesnice a čtečky obrazovky.",
+      "topics": [
+        "Pravidla WCAG 2.2",
+        "Ovládání klávesnicí a :focus-visible",
+        "ARIA atributy",
+        "Kontrast barev a alternativní texty"
+      ]
+    },
+    {
+      "slug": "sql-databaze",
+      "title": "SQL a relační databáze",
+      "category": "data",
+      "level": "intermediate",
+      "format": "prezenčně",
+      "duration": 24,
+      "lessons": 12,
+      "price": 3190,
+      "lecturer": "Tomáš Dvořák",
+      "image": "data.jpg",
+      "featured": false,
+      "perex": "Navrhněte databázi a naučte se z ní dotazy vytáhnout přesně to, co potřebujete.",
+      "description": "Naučíte se navrhovat tabulky a vztahy mezi nimi a psát dotazy v jazyce SQL. Pracovat budeme na reálné ukázkové databázi internetového obchodu.",
+      "topics": [
+        "Návrh tabulek a vztahů",
+        "Dotazy SELECT a filtrování",
+        "Spojování tabulek (JOIN)",
+        "Agregační funkce"
+      ]
+    },
+    {
+      "slug": "analyza-dat",
+      "title": "Analýza dat pro každého",
+      "category": "data",
+      "level": "advanced",
+      "format": "kombinovaně",
+      "duration": 36,
+      "lessons": 18,
+      "price": 4490,
+      "lecturer": "Martina Veselá",
+      "image": "data.jpg",
+      "featured": false,
+      "perex": "Od surových čísel ke grafům, ze kterých je hned vidět, co se děje.",
+      "description": "Pokročilý kurz pro ty, kdo už zvládají základy Pythonu. Naučíte se data čistit, analyzovat a přehledně vizualizovat. Kurz končí vlastním analytickým projektem.",
+      "topics": [
+        "Čištění a příprava dat",
+        "Popisná statistika",
+        "Vizualizace dat v grafech",
+        "Prezentace výsledků"
+      ]
+    },
+    {
+      "slug": "css-architektura",
+      "title": "Architektura CSS: tokeny, vrstvy a BEM",
+      "category": "web",
+      "level": "advanced",
+      "format": "online",
+      "duration": 14,
+      "lessons": 7,
+      "price": 2790,
+      "lecturer": "Petr Svoboda",
+      "image": "web.jpg",
+      "featured": false,
+      "perex": "Pište CSS, které se dá udržovat i po roce a ve větším týmu.",
+      "description": "Kurz pro pokročilé kodéry. Ukážeme si design tokeny v CSS proměnných, řízení kaskády pomocí @layer, pojmenování tříd podle BEM a moderní dotazy na kontejner.",
+      "topics": [
+        "Design tokeny a CSS proměnné",
+        "Kaskádové vrstvy @layer",
+        "Metodika BEM",
+        "Container Queries"
+      ]
+    }
+  ]
+}

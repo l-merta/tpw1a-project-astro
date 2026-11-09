@@ -1,0 +1,121 @@
+/*
+  Design tokeny: všechny barvy, písma, mezery, zaoblení a stíny na jednom místě.
+  Komponenty používají jen var(--...), takže změnou tokenu se změní celý web.
+*/
+@layer tokens {
+	:root {
+		/* Barvy (světlý režim) */
+		--color-bg: #f8fafc;
+		--color-surface: #ffffff;
+		--color-surface-alt: #eef2f7;
+		--color-text: #1e293b;
+		--color-text-muted: #475569;
+		--color-border: #cbd5e1;
+		--color-primary: #1d4ed8;
+		--color-primary-hover: #1e3a8a;
+		--color-on-primary: #ffffff;
+		--color-accent: #b45309;
+		--color-accent-soft: #fef3c7;
+		--color-success: #15803d;
+		--color-success-soft: #dcfce7;
+		--color-danger: #b91c1c;
+		--color-focus: #f59e0b;
+
+		/* Barvy štítků podle úrovně kurzu */
+		--color-level-beginner: #dcfce7;
+		--color-level-beginner-text: #14532d;
+		--color-level-intermediate: #dbeafe;
+		--color-level-intermediate-text: #1e3a8a;
+		--color-level-advanced: #fce7f3;
+		--color-level-advanced-text: #831843;
+
+		/* Typografie */
+		--font-body: var(--font-atkinson), system-ui, sans-serif;
+		--font-size-sm: 0.875rem;
+		--font-size-base: 1rem;
+		--font-size-lg: 1.25rem;
+		--font-size-xl: 1.5rem;
+		--font-size-2xl: 2rem;
+		--font-size-3xl: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+		--line-height-tight: 1.2;
+		--line-height-base: 1.6;
+		--font-weight-bold: 700;
+
+		/* Mezery (spacing scale) */
+		--space-unit: 0.25rem;
+		--space-xs: calc(var(--space-unit) * 2);
+		--space-sm: calc(var(--space-unit) * 3);
+		--space-md: calc(var(--space-unit) * 4);
+		--space-lg: calc(var(--space-unit) * 6);
+		--space-xl: calc(var(--space-unit) * 10);
+		--space-2xl: calc(var(--space-unit) * 16);
+
+		/* Ostatní */
+		--container-width: 72rem;
+		--border-radius: 0.75rem;
+		--border-radius-sm: 0.375rem;
+		--border-radius-pill: 999px;
+		--box-shadow: 0 1px 3px rgb(15 23 42 / 0.08), 0 8px 24px rgb(15 23 42 / 0.08);
+		--box-shadow-lg: 0 12px 40px rgb(15 23 42 / 0.18);
+		--transition: 150ms ease-in-out;
+
+		color-scheme: light;
+	}
+
+	/*
+	  Tmavý režim. Platí, když ho chce systém (prefers-color-scheme)
+	  a uživatel ho tlačítkem nevypnul, nebo když ho uživatel zapnul ručně.
+	  Stačí jen přenastavit barevné tokeny.
+	*/
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme='light']) {
+			--color-bg: #0f172a;
+			--color-surface: #1e293b;
+			--color-surface-alt: #172033;
+			--color-text: #e2e8f0;
+			--color-text-muted: #a8b5c8;
+			--color-border: #334155;
+			--color-primary: #93c5fd;
+			--color-primary-hover: #bfdbfe;
+			--color-on-primary: #0f172a;
+			--color-accent: #fbbf24;
+			--color-accent-soft: #3b2f12;
+			--color-success: #86efac;
+			--color-success-soft: #143323;
+			--color-danger: #fca5a5;
+			--color-level-beginner: #143323;
+			--color-level-beginner-text: #bbf7d0;
+			--color-level-intermediate: #172554;
+			--color-level-intermediate-text: #bfdbfe;
+			--color-level-advanced: #4a1230;
+			--color-level-advanced-text: #fbcfe8;
+			--box-shadow: 0 1px 3px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.3);
+			color-scheme: dark;
+		}
+	}
+
+	:root[data-theme='dark'] {
+		--color-bg: #0f172a;
+		--color-surface: #1e293b;
+		--color-surface-alt: #172033;
+		--color-text: #e2e8f0;
+		--color-text-muted: #a8b5c8;
+		--color-border: #334155;
+		--color-primary: #93c5fd;
+		--color-primary-hover: #bfdbfe;
+		--color-on-primary: #0f172a;
+		--color-accent: #fbbf24;
+		--color-accent-soft: #3b2f12;
+		--color-success: #86efac;
+		--color-success-soft: #143323;
+		--color-danger: #fca5a5;
+		--color-level-beginner: #143323;
+		--color-level-beginner-text: #bbf7d0;
+		--color-level-intermediate: #172554;
+		--color-level-intermediate-text: #bfdbfe;
+		--color-level-advanced: #4a1230;
+		--color-level-advanced-text: #fbcfe8;
+		--box-shadow: 0 1px 3px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.3);
+		color-scheme: dark;
+	}
+}

@@ -1,0 +1,81 @@
+---
+// Společná kostra všech stránek: <head> se SEO meta tagy, hlavička, obsah a patička.
+// Každá stránka předá title a description, obsah stránky se vloží do <slot />.
+import { Font } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import '../styles/main.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import site from '../data/site.json';
+import defaultImage from '../assets/web.jpg';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: ImageMetadata;
+}
+
+const { title, description = site.description, image = defaultImage } = Astro.props;
+
+// Na úvodní stránce jen název webu, jinde "Stránka | Kurzovna"
+const fullTitle = title ? `${title} | ${site.title}` : `${site.title} – katalog kurzů`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image.src, Astro.site);
+---
+
+<!doctype html>
+<html lang="cs">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="canonical" href={canonicalURL} />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- SEO -->
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+
+		<!-- Open Graph (náhled při sdílení na sociálních sítích) -->
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="cs_CZ" />
+		<meta property="og:site_name" content={site.title} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={imageURL} />
+
+		<!-- Twitter / X Cards -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={fullTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageURL} />
+
+		<Font cssVariable="--font-atkinson" preload />
+
+		<!--
+			Nastaví uložený (nebo systémový) režim ještě před vykreslením stránky,
+			aby stránka při načtení neblikla bílou barvou. is:inline = Astro skript nezpracovává.
+		-->
+		<script is:inline>
+			(function () {
+				var saved = null;
+				try {
+					saved = localStorage.getItem('theme');
+				} catch (e) {}
+				var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light');
+			})();
+		</script>
+	</head>
+	<body class="page">
+		<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
+		<Header />
+		<main id="obsah" tabindex="-1">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

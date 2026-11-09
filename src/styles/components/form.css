@@ -1,0 +1,104 @@
+/* Formuláře: popisky, pole, nápovědy a stavy (:focus-visible, :user-invalid, :disabled). */
+@layer components {
+	.form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+	}
+
+	.form__fieldset {
+		display: grid;
+		gap: var(--space-md);
+		padding: var(--space-md);
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius);
+	}
+
+	.form__legend {
+		padding-inline: var(--space-xs);
+		font-weight: var(--font-weight-bold);
+	}
+
+	.form__group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.form__label {
+		font-weight: var(--font-weight-bold);
+	}
+
+	.form__required {
+		color: var(--color-danger);
+	}
+
+	.form__input {
+		width: 100%;
+		min-height: 2.75rem;
+		padding: var(--space-xs) var(--space-sm);
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius-sm);
+		background-color: var(--color-bg);
+		transition: border-color var(--transition);
+	}
+
+	.form__input--textarea {
+		min-height: 8rem;
+		resize: vertical;
+	}
+
+	.form__input:hover {
+		border-color: var(--color-text-muted);
+	}
+
+	.form__input:focus-visible {
+		border-color: var(--color-primary);
+		outline-offset: 1px;
+	}
+
+	/* Chyba se ukáže až poté, co uživatel s polem pracoval */
+	.form__input:user-invalid {
+		border-color: var(--color-danger);
+		box-shadow: inset 4px 0 0 var(--color-danger);
+	}
+
+	.form__input:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.form__hint {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+	}
+
+	.form__check {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-xs);
+	}
+
+	.form__checkbox {
+		width: 1.25rem;
+		height: 1.25rem;
+		margin-top: 0.2rem;
+		accent-color: var(--color-primary);
+	}
+
+	.form__success {
+		padding: var(--space-md);
+		border-radius: var(--border-radius-sm);
+		background-color: var(--color-success-soft);
+		color: var(--color-success);
+		font-weight: var(--font-weight-bold);
+	}
+
+	@media (min-width: 40rem) {
+		.form__row {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: var(--space-md);
+		}
+	}
+}

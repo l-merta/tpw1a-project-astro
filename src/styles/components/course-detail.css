@@ -1,0 +1,98 @@
+/* Detail kurzu: obsah a postranní panel rozvržené pomocí grid-template-areas. */
+@layer components {
+	.course-detail {
+		display: grid;
+		grid-template-areas:
+			'image'
+			'sidebar'
+			'content';
+		gap: var(--space-lg);
+	}
+
+	.course-detail__image {
+		grid-area: image;
+		width: 100%;
+		border-radius: var(--border-radius);
+		object-fit: cover;
+	}
+
+	.course-detail__content {
+		grid-area: content;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-lg);
+	}
+
+	.course-detail__sidebar {
+		grid-area: sidebar;
+	}
+
+	.course-detail__heading {
+		margin-bottom: var(--space-sm);
+		font-size: var(--font-size-xl);
+	}
+
+	.course-detail__topics {
+		display: grid;
+		gap: var(--space-xs);
+		list-style: none;
+	}
+
+	.course-detail__topic {
+		display: flex;
+		gap: var(--space-xs);
+	}
+
+	.course-detail__topic::before {
+		content: '✓';
+		font-weight: var(--font-weight-bold);
+		color: var(--color-success);
+	}
+
+	/* Box s cenou a fakty o kurzu */
+	.info-box {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		padding: var(--space-lg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius);
+		background-color: var(--color-surface);
+		box-shadow: var(--box-shadow);
+	}
+
+	.info-box__price {
+		font-size: var(--font-size-2xl);
+		font-weight: var(--font-weight-bold);
+	}
+
+	.info-box__facts {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: var(--space-xs) var(--space-md);
+	}
+
+	.info-box__term {
+		color: var(--color-text-muted);
+	}
+
+	.info-box__value {
+		font-weight: var(--font-weight-bold);
+		text-align: right;
+	}
+
+	@media (min-width: 56rem) {
+		.course-detail {
+			grid-template-areas:
+				'image sidebar'
+				'content sidebar';
+			grid-template-columns: 2fr 1fr;
+			align-items: start;
+		}
+
+		.course-detail__sidebar {
+			position: sticky;
+			top: 5rem;
+		}
+	}
+}

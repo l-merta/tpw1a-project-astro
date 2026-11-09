@@ -1,0 +1,39 @@
+/* Štítek (úroveň kurzu, forma výuky). */
+@layer components {
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.125rem var(--space-sm);
+		border-radius: var(--border-radius-pill);
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-bold);
+		line-height: 1.6;
+		background-color: var(--color-surface-alt);
+		color: var(--color-text);
+	}
+
+	.badge--beginner {
+		background-color: var(--color-level-beginner);
+		color: var(--color-level-beginner-text);
+	}
+
+	.badge--intermediate {
+		background-color: var(--color-level-intermediate);
+		color: var(--color-level-intermediate-text);
+	}
+
+	.badge--advanced {
+		background-color: var(--color-level-advanced);
+		color: var(--color-level-advanced-text);
+	}
+
+	.badge--accent {
+		background-color: var(--color-accent-soft);
+		color: var(--color-accent);
+	}
+
+	.badge--outline {
+		border: 1px solid var(--color-border);
+		background-color: transparent;
+	}
+}

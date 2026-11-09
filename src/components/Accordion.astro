@@ -1,0 +1,18 @@
+---
+// Rozbalovací panel postavený na <details> a <summary>.
+// Obsah odpovědi se vkládá do výchozího slotu.
+interface Props {
+	title: string;
+	variant?: 'default' | 'plain';
+	open?: boolean;
+}
+
+const { title, variant = 'default', open = false } = Astro.props;
+---
+
+<details class:list={['accordion', { [`accordion--${variant}`]: variant !== 'default' }]} open={open}>
+	<summary class="accordion__summary">{title}</summary>
+	<div class="accordion__content">
+		<slot />
+	</div>
+</details>

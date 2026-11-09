@@ -1,0 +1,29 @@
+---
+// Kontaktní stránka s formulářem.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EnrollForm from '../components/EnrollForm.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<BaseLayout title="Kontakt" description="Napište nám dotaz ke kurzům nebo se přihlaste.">
+	<Hero variant="compact" title="Kontakt" text="Máte dotaz ke kurzu? Vyplňte formulář a ozveme se vám." />
+
+	<section class="section" aria-label="Kontaktní formulář">
+		<div class="container course-detail">
+			<div class="course-detail__content">
+				<EnrollForm idPrefix="contact" />
+			</div>
+			<aside class="course-detail__sidebar" aria-label="Kontaktní údaje">
+				<div class="info-box">
+					<h2 class="course-detail__heading">Kurzovna</h2>
+					<address>
+						Hradecká 1249/6<br />
+						500 03 Hradec Králové<br />
+						<a href="mailto:info@kurzovna.example">info@kurzovna.example</a>
+					</address>
+					<p class="text-muted">Po až Pá, 9:00 až 17:00</p>
+				</div>
+			</aside>
+		</div>
+	</section>
+</BaseLayout>

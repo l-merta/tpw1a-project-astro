@@ -1,0 +1,72 @@
+---
+// Filtr kurzů podle kategorie. Bez JavaScriptu se zobrazí všechny kurzy
+// (progressive enhancement), skript jen skrývá karty, které neodpovídají.
+interface Category {
+	id: string;
+	name: string;
+}
+
+interface Props {
+	categories: Category[];
+	total: number;
+}
+
+const { categories, total } = Astro.props;
+---
+
+<div class="filter" data-filter role="group" aria-labelledby="filter-label" hidden>
+	<span class="filter__label" id="filter-label">Kategorie:</span>
+	<button type="button" class="filter__button" data-filter-value="all" aria-pressed="true">Vše</button>
+	{
+		categories.map((category) => (
+			<button type="button" class="filter__button" data-filter-value={category.id} aria-pressed="false">
+				{category.name}
+			</button>
+		))
+	}
+	<p class="filter__status" data-filter-status aria-live="polite">Zobrazeno {total} z {total} kurzů</p>
+</div>
+
+<script>
+	const filter = document.querySelector<HTMLElement>('[data-filter]');
+
+	if (filter) {
+		// Filtr ukážeme až tady, protože bez JavaScriptu by nefungoval
+		filter.hidden = false;
+
+		const buttons = filter.querySelectorAll<HTMLButtonElement>('[data-filter-value]');
+		const status = filter.querySelector<HTMLElement>('[data-filter-status]');
+		const cards = document.querySelectorAll<HTMLElement>('[data-course-category]');
+
+		function setFilter(value: string) {
+			let visible = 0;
+
+			cards.forEach((card) => {
+				const show = value === 'all' || card.dataset.courseCategory === value;
+				card.classList.toggle('hidden', !show);
+				if (show) visible++;
+			});
+
+			buttons.forEach((button) => {
+				button.setAttribute('aria-pressed', String(button.dataset.filterValue === value));
+			});
+
+			if (status) status.textContent = `Zobrazeno ${visible} z ${cards.length} kurzů`;
+
+			// Kategorii zapíšeme do adresy, aby šel odkaz sdílet
+			const url = new URL(window.location.href);
+			if (value === 'all') url.searchParams.delete('kategorie');
+			else url.searchParams.set('kategorie', value);
+			history.replaceState(null, '', url);
+		}
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => setFilter(button.dataset.filterValue ?? 'all'));
+		});
+
+		// Odkaz z patičky typu /kurzy/?kategorie=web rovnou vyfiltruje
+		const initial = new URLSearchParams(window.location.search).get('kategorie');
+		const exists = [...buttons].some((button) => button.dataset.filterValue === initial);
+		if (initial && exists) setFilter(initial);
+	}
+</script>

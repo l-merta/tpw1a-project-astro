@@ -1,0 +1,27 @@
+---
+// Časté dotazy. Otázky a odpovědi jsou v faq.json, každá se vykreslí jako Accordion.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Accordion from '../components/Accordion.astro';
+import Button from '../components/Button.astro';
+import Hero from '../components/Hero.astro';
+import faq from '../data/faq.json';
+---
+
+<BaseLayout title="Časté dotazy" description="Odpovědi na nejčastější otázky o kurzech, výuce a přihláškách.">
+	<Hero variant="compact" title="Časté dotazy" text="Nenašli jste odpověď? Napište nám, rádi poradíme." />
+
+	<section class="section" aria-label="Otázky a odpovědi">
+		<div class="container">
+			{
+				faq.map((item, index) => (
+					<Accordion title={item.question} open={index === 0}>
+						<p>{item.answer}</p>
+					</Accordion>
+				))
+			}
+			<p class="text-center mt-8">
+				<Button href="/kontakt/" variant="secondary">Zeptat se lektora</Button>
+			</p>
+		</div>
+	</section>
+</BaseLayout>

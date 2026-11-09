@@ -1,0 +1,41 @@
+---
+// Tlačítko. Když dostane href, vykreslí se jako odkaz <a>, jinak jako <button>.
+// Příklad: <Button href="/kurzy/" variant="secondary" size="small">Kurzy</Button>
+interface Props {
+	href?: string;
+	variant?: 'primary' | 'secondary' | 'ghost';
+	size?: 'normal' | 'small';
+	block?: boolean;
+	type?: 'button' | 'submit' | 'reset';
+	disabled?: boolean;
+	[key: string]: unknown; // další atributy (např. data-*, aria-*) se předají dál
+}
+
+const {
+	href,
+	variant = 'primary',
+	size = 'normal',
+	block = false,
+	type = 'button',
+	disabled = false,
+	...rest
+} = Astro.props;
+
+const classes = [
+	'btn',
+	`btn--${variant}`,
+	{ 'btn--small': size === 'small', 'btn--block': block, 'btn--disabled': disabled && Boolean(href) },
+];
+---
+
+{
+	href ? (
+		<a href={href} class:list={classes} aria-disabled={disabled ? 'true' : undefined} {...rest}>
+			<slot />
+		</a>
+	) : (
+		<button type={type} class:list={classes} disabled={disabled} {...rest}>
+			<slot />
+		</button>
+	)
+}

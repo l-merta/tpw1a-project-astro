@@ -1,0 +1,36 @@
+/* Moderní reset: stejný výchozí stav ve všech prohlížečích. */
+@layer reset {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+	}
+
+	img,
+	picture,
+	svg {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+		color: inherit;
+	}
+
+	ul[role='list'],
+	ol[role='list'] {
+		list-style: none;
+	}
+}

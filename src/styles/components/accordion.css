@@ -1,0 +1,68 @@
+/* Akordeon postavený na <details> a <summary>. Funguje i bez JavaScriptu. */
+@layer components {
+	.accordion {
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius);
+		background-color: var(--color-surface);
+	}
+
+	.accordion + .accordion {
+		margin-top: var(--space-sm);
+	}
+
+	.accordion__summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-md);
+		padding: var(--space-md);
+		font-weight: var(--font-weight-bold);
+		list-style: none;
+		cursor: pointer;
+	}
+
+	/* Skryjeme výchozí šipku v Safari */
+	.accordion__summary::-webkit-details-marker {
+		display: none;
+	}
+
+	/* Vlastní ikona +, po otevření se otočí na × */
+	.accordion__summary::after {
+		content: '+';
+		flex-shrink: 0;
+		font-size: var(--font-size-xl);
+		line-height: 1;
+		color: var(--color-primary);
+		transition: transform var(--transition);
+	}
+
+	.accordion[open] > .accordion__summary::after {
+		transform: rotate(45deg);
+	}
+
+	.accordion__summary:hover {
+		color: var(--color-primary);
+	}
+
+	.accordion__content {
+		padding: 0 var(--space-md) var(--space-md);
+		color: var(--color-text-muted);
+	}
+
+	/* Modifikátor: jednodušší vzhled bez rámečku (např. osnova kurzu) */
+	.accordion--plain {
+		border: 0;
+		border-bottom: 1px solid var(--color-border);
+		border-radius: 0;
+		background-color: transparent;
+	}
+
+	.accordion--plain + .accordion--plain {
+		margin-top: 0;
+	}
+
+	.accordion--plain .accordion__summary,
+	.accordion--plain .accordion__content {
+		padding-inline: 0;
+	}
+}

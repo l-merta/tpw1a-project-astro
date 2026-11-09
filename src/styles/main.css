@@ -1,0 +1,29 @@
+/*
+  Hlavní stylopis webu.
+  1) Nejdřív určíme pořadí vrstev. Později uvedená vrstva má přednost,
+     takže utility vždy přebijí komponenty bez ohledu na specificitu selektoru.
+  2) Potom naimportujeme jednotlivé soubory. Každý soubor si svůj obsah
+     sám zabalí do správné vrstvy (@layer ... { }).
+*/
+@layer reset, tokens, base, components, utilities;
+
+@import './reset.css';
+@import './tokens.css';
+@import './base.css';
+
+@import './components/layout.css';
+@import './components/site-header.css';
+@import './components/nav.css';
+@import './components/theme-toggle.css';
+@import './components/site-footer.css';
+@import './components/hero.css';
+@import './components/button.css';
+@import './components/badge.css';
+@import './components/course-card.css';
+@import './components/filter.css';
+@import './components/accordion.css';
+@import './components/modal.css';
+@import './components/form.css';
+@import './components/course-detail.css';
+
+@import './utilities.css';

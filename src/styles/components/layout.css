@@ -1,0 +1,82 @@
+/* Obecné rozvržení stránky: obal obsahu, sekce a "sticky footer". */
+@layer components {
+	/* Body je mřížka o třech řádcích: hlavička, obsah, patička.
+	   Obsah (1fr) zabere zbytek výšky, takže patička je vždy dole. */
+	.page {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+		min-height: 100vh;
+	}
+
+	.container {
+		width: 100%;
+		max-width: var(--container-width);
+		margin-inline: auto;
+		padding-inline: var(--space-md);
+	}
+
+	.section {
+		padding-block: var(--space-xl);
+	}
+
+	.section--alt {
+		background-color: var(--color-surface-alt);
+	}
+
+	.section__header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-sm);
+		margin-bottom: var(--space-lg);
+	}
+
+	.section__title {
+		font-size: var(--font-size-xl);
+	}
+
+	/* Odkaz "Přeskočit na obsah" se ukáže až při zaměření klávesnicí */
+	.skip-link {
+		position: absolute;
+		top: var(--space-xs);
+		left: var(--space-xs);
+		z-index: 100;
+		padding: var(--space-xs) var(--space-md);
+		border-radius: var(--border-radius-sm);
+		background-color: var(--color-primary);
+		color: var(--color-on-primary);
+		transform: translateY(-200%);
+	}
+
+	.skip-link:focus-visible {
+		transform: translateY(0);
+		color: var(--color-on-primary);
+	}
+
+	/* Mřížka karet: počet sloupců se přizpůsobí šířce bez media queries */
+	.course-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+		gap: var(--space-lg);
+	}
+
+	/* Na úvodní stránce se první doporučený kurz roztáhne přes celou šířku */
+	.course-grid--featured {
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+	}
+
+	.course-grid--featured > :first-child {
+		grid-column: 1 / -1;
+	}
+
+	@media (min-width: 48rem) {
+		.section {
+			padding-block: var(--space-2xl);
+		}
+
+		.section__title {
+			font-size: var(--font-size-2xl);
+		}
+	}
+}

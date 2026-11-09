@@ -1,0 +1,66 @@
+/* Základní vzhled HTML prvků (bez tříd). */
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		min-height: 100vh;
+		font-family: var(--font-body);
+		font-size: var(--font-size-base);
+		line-height: var(--line-height-base);
+		color: var(--color-text);
+		background-color: var(--color-bg);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		line-height: var(--line-height-tight);
+		font-weight: var(--font-weight-bold);
+	}
+
+	h1 {
+		font-size: var(--font-size-3xl);
+	}
+
+	h2 {
+		font-size: var(--font-size-2xl);
+	}
+
+	h3 {
+		font-size: var(--font-size-lg);
+	}
+
+	p + p {
+		margin-top: var(--space-md);
+	}
+
+	a {
+		color: var(--color-primary);
+		text-underline-offset: 0.2em;
+	}
+
+	a:hover {
+		color: var(--color-primary-hover);
+	}
+
+	/* Viditelný stav zaměření klávesnicí pro všechny ovládací prvky */
+	:focus-visible {
+		outline: 3px solid var(--color-focus);
+		outline-offset: 3px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			transition-duration: 0.01ms !important;
+		}
+	}
+}

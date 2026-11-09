@@ -1,0 +1,15 @@
+{
+  "title": "Kurzovna",
+  "description": "Katalog kurzů webového vývoje, programování, designu a práce s daty.",
+  "navigation": [
+    { "label": "Úvod", "href": "/" },
+    { "label": "Kurzy", "href": "/kurzy/" },
+    { "label": "Časté dotazy", "href": "/faq/" },
+    { "label": "Kontakt", "href": "/kontakt/" }
+  ],
+  "levels": {
+    "beginner": "Začátečník",
+    "intermediate": "Mírně pokročilý",
+    "advanced": "Pokročilý"
+  }
+}

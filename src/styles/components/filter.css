@@ -1,0 +1,42 @@
+/* Filtr kurzů podle kategorie. */
+@layer components {
+	.filter {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-xs);
+		margin-bottom: var(--space-lg);
+	}
+
+	.filter__label {
+		margin-right: var(--space-xs);
+		font-weight: var(--font-weight-bold);
+	}
+
+	.filter__button {
+		padding: var(--space-xs) var(--space-md);
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius-pill);
+		background-color: var(--color-surface);
+		cursor: pointer;
+		transition: background-color var(--transition), color var(--transition);
+	}
+
+	.filter__button:hover {
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+	}
+
+	/* Aktivní tlačítko poznáme podle atributu aria-pressed */
+	.filter__button[aria-pressed='true'] {
+		border-color: var(--color-primary);
+		background-color: var(--color-primary);
+		color: var(--color-on-primary);
+	}
+
+	.filter__status {
+		width: 100%;
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+	}
+}

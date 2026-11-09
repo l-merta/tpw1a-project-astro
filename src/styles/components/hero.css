@@ -1,0 +1,97 @@
+/* Úvodní banner stránky. Modifikátor --large pro úvod, --compact pro podstránky. */
+@layer components {
+	.hero {
+		padding-block: var(--space-xl);
+		background-color: var(--color-surface-alt);
+	}
+
+	.hero__inner {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+	}
+
+	.hero__eyebrow {
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-bold);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+	}
+
+	.hero__text {
+		max-width: 40rem;
+		font-size: var(--font-size-lg);
+		color: var(--color-text-muted);
+	}
+
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-sm);
+	}
+
+	.hero--large {
+		padding-block: var(--space-2xl);
+		background-image: linear-gradient(
+			135deg,
+			var(--color-surface-alt) 0%,
+			var(--color-accent-soft) 100%
+		);
+	}
+
+	.hero--compact {
+		padding-block: var(--space-lg);
+	}
+
+	.hero--compact .hero__title {
+		font-size: var(--font-size-2xl);
+	}
+
+	.hero--compact .hero__text {
+		font-size: var(--font-size-base);
+	}
+
+	/* Statistiky v hero banneru (počet kurzů atd.) */
+	.hero__stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-sm);
+		margin-top: var(--space-md);
+		list-style: none;
+	}
+
+	.hero__stat {
+		padding: var(--space-sm);
+		border-radius: var(--border-radius);
+		background-color: var(--color-surface);
+		box-shadow: var(--box-shadow);
+		text-align: center;
+	}
+
+	.hero__stat-value {
+		display: block;
+		font-size: var(--font-size-xl);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-primary);
+	}
+
+	.hero__stat-label {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+	}
+
+	@media (min-width: 48rem) {
+		.hero--large .hero__inner {
+			display: grid;
+			grid-template-columns: 3fr 2fr;
+			align-items: center;
+			gap: var(--space-xl);
+		}
+
+		.hero--large .hero__stats {
+			grid-template-columns: 1fr;
+			margin-top: 0;
+		}
+	}
+}

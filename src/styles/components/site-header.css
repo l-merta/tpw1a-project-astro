@@ -1,0 +1,136 @@
+/* Hlavička webu s hamburger menu bez JavaScriptu (skrytý checkbox + :checked). */
+@layer components {
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		border-bottom: 1px solid var(--color-border);
+		background-color: var(--color-surface);
+	}
+
+	.site-header__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-sm);
+		min-height: 4rem;
+	}
+
+	.site-header__logo {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		margin-right: auto;
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.site-header__logo-mark {
+		display: grid;
+		place-items: center;
+		width: 2rem;
+		height: 2rem;
+		border-radius: var(--border-radius-sm);
+		background-color: var(--color-primary);
+		color: var(--color-on-primary);
+		font-size: var(--font-size-base);
+	}
+
+	/* Checkbox je vizuálně skrytý, ale dá se na něj dostat klávesou Tab */
+	.site-header__toggle {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.site-header__burger {
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius-sm);
+		cursor: pointer;
+	}
+
+	.site-header__burger-lines,
+	.site-header__burger-lines::before,
+	.site-header__burger-lines::after {
+		display: block;
+		width: 1.25rem;
+		height: 2px;
+		background-color: var(--color-text);
+		transition: transform var(--transition), background-color var(--transition);
+	}
+
+	.site-header__burger-lines {
+		position: relative;
+	}
+
+	.site-header__burger-lines::before,
+	.site-header__burger-lines::after {
+		content: '';
+		position: absolute;
+		left: 0;
+	}
+
+	.site-header__burger-lines::before {
+		top: -6px;
+	}
+
+	.site-header__burger-lines::after {
+		top: 6px;
+	}
+
+	/* Fokus na skrytém checkboxu zobrazíme na jeho popisku */
+	.site-header__toggle:focus-visible + .site-header__burger {
+		outline: 3px solid var(--color-focus);
+		outline-offset: 3px;
+	}
+
+	/* Otevřené menu: z hamburgeru se stane křížek */
+	.site-header__toggle:checked + .site-header__burger .site-header__burger-lines {
+		background-color: transparent;
+	}
+
+	.site-header__toggle:checked + .site-header__burger .site-header__burger-lines::before {
+		transform: translateY(6px) rotate(45deg);
+	}
+
+	.site-header__toggle:checked + .site-header__burger .site-header__burger-lines::after {
+		transform: translateY(-6px) rotate(-45deg);
+	}
+
+	/* Na mobilu je navigace pod hlavičkou a je skrytá, dokud checkbox není zaškrtnutý */
+	.site-header__nav {
+		display: none;
+		order: 10;
+		flex-basis: 100%;
+		padding-bottom: var(--space-md);
+	}
+
+	.site-header__toggle:checked ~ .site-header__nav {
+		display: block;
+	}
+
+	/* Od tabletu výš je menu vždy vidět a hamburger zmizí */
+	@media (min-width: 48rem) {
+		.site-header__burger {
+			display: none;
+		}
+
+		.site-header__nav {
+			display: block;
+			order: 0;
+			flex-basis: auto;
+			padding-bottom: 0;
+		}
+
+		/* Přepínač režimu dáme na desktopu až za navigaci */
+		.site-header__theme {
+			order: 1;
+		}
+	}
+}

@@ -1,0 +1,37 @@
+---
+// Seznam všech kurzů s filtrem podle kategorie.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import CourseFilter from '../../components/CourseFilter.astro';
+import Hero from '../../components/Hero.astro';
+import courseData from '../../data/courses.json';
+
+const { courses, categories } = courseData;
+const categoryName = (id: string) => categories.find((category) => category.id === id)?.name ?? id;
+---
+
+<BaseLayout title="Všechny kurzy" description="Přehled všech kurzů v katalogu Kurzovna s filtrem podle kategorie.">
+	<Hero
+		variant="compact"
+		title="Všechny kurzy"
+		text="Vyberte si kategorii nebo projděte celou nabídku. Kliknutím na kurz zobrazíte jeho detail."
+	/>
+
+	<section class="section" aria-label="Seznam kurzů">
+		<div class="container">
+			<CourseFilter categories={categories} total={courses.length} />
+			<div class="course-grid">
+				{
+					courses.map((course) => (
+						<CourseCard
+							course={course}
+							categoryName={categoryName(course.category)}
+							featured={course.featured}
+							headingLevel="h2"
+						/>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</BaseLayout>

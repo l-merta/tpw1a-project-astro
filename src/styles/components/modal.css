@@ -1,0 +1,52 @@
+/* Modální okno postavené na prvku <dialog>. */
+@layer components {
+	.modal {
+		width: min(100% - 2 * var(--space-md), 32rem);
+		max-height: calc(100vh - 2 * var(--space-md));
+		margin: auto;
+		padding: 0;
+		border: 0;
+		border-radius: var(--border-radius);
+		background-color: var(--color-surface);
+		color: var(--color-text);
+		box-shadow: var(--box-shadow-lg);
+	}
+
+	.modal::backdrop {
+		background-color: rgb(15 23 42 / 0.6);
+	}
+
+	.modal__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-md);
+		padding: var(--space-md) var(--space-lg);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.modal__title {
+		font-size: var(--font-size-lg);
+	}
+
+	.modal__close {
+		display: grid;
+		place-items: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 0;
+		border-radius: var(--border-radius-pill);
+		background-color: transparent;
+		font-size: var(--font-size-xl);
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.modal__close:hover {
+		background-color: var(--color-surface-alt);
+	}
+
+	.modal__body {
+		padding: var(--space-lg);
+	}
+}

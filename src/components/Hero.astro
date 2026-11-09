@@ -1,0 +1,30 @@
+---
+// Úvodní banner. variant="large" pro úvodní stránku, "compact" pro podstránky.
+// Tlačítka se vkládají do pojmenovaného slotu "actions", doplňkový obsah do slotu "aside".
+interface Props {
+	title: string;
+	text?: string;
+	eyebrow?: string;
+	variant?: 'default' | 'large' | 'compact';
+}
+
+const { title, text, eyebrow, variant = 'default' } = Astro.props;
+---
+
+<section class:list={['hero', { [`hero--${variant}`]: variant !== 'default' }]}>
+	<div class="container hero__inner">
+		<div class="hero__content">
+			{eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
+			<h1 class="hero__title">{title}</h1>
+			{text && <p class="hero__text mt-4">{text}</p>}
+			{
+				Astro.slots.has('actions') && (
+					<div class="hero__actions mt-8">
+						<slot name="actions" />
+					</div>
+				)
+			}
+		</div>
+		<slot name="aside" />
+	</div>
+</section>

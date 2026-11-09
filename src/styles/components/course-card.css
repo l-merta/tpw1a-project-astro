@@ -1,0 +1,142 @@
+/*
+  Karta kurzu. Obal .course-card-wrapper je kontejner, takže karta
+  mění rozvržení podle své vlastní šířky (Container Query), ne podle okna.
+*/
+@layer components {
+	.course-card-wrapper {
+		container-type: inline-size;
+		container-name: course-card;
+	}
+
+	.course-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius);
+		background-color: var(--color-surface);
+		box-shadow: var(--box-shadow);
+		transition: transform var(--transition), box-shadow var(--transition);
+	}
+
+	.course-card:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--box-shadow-lg);
+	}
+
+	/* Když je zaměřený odkaz uvnitř karty, zvýrazníme celou kartu */
+	.course-card:focus-within {
+		outline: 3px solid var(--color-focus);
+		outline-offset: 3px;
+	}
+
+	.course-card__image {
+		width: 100%;
+		aspect-ratio: 2 / 1;
+		object-fit: cover;
+	}
+
+	.course-card__body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: var(--space-sm);
+		padding: var(--space-md);
+	}
+
+	.course-card__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xs);
+	}
+
+	.course-card__title {
+		font-size: var(--font-size-lg);
+	}
+
+	.course-card__link {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	/* Celá karta je klikací: pseudo-prvek odkazu ji překryje */
+	.course-card__link::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+
+	.course-card__link:focus-visible {
+		outline: none;
+	}
+
+	.course-card__perex {
+		color: var(--color-text-muted);
+	}
+
+	.course-card__info {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xs) var(--space-md);
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
+		list-style: none;
+	}
+
+	.course-card__footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-sm);
+		margin-top: auto;
+		padding-top: var(--space-sm);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.course-card__price {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-bold);
+	}
+
+	/* Tlačítka v patičce karty musí být nad překryvným odkazem */
+	.course-card__footer .btn {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Modifikátor: doporučený kurz */
+	.course-card--featured {
+		border: 2px solid var(--color-accent);
+	}
+
+	.course-card__ribbon {
+		position: absolute;
+		top: var(--space-sm);
+		left: var(--space-sm);
+		z-index: 1;
+		box-shadow: var(--box-shadow);
+	}
+
+	/* Široká karta (aspoň 36rem): obrázek vlevo, text vpravo */
+	@container course-card (min-width: 36rem) {
+		.course-card {
+			display: grid;
+			grid-template-columns: 2fr 3fr;
+		}
+
+		.course-card__image {
+			height: 100%;
+			aspect-ratio: auto;
+		}
+
+		.course-card__body {
+			padding: var(--space-lg);
+		}
+
+		.course-card__title {
+			font-size: clamp(var(--font-size-lg), 4cqw, var(--font-size-2xl));
+		}
+	}
+}

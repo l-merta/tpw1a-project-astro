@@ -1,0 +1,40 @@
+---
+// Modální okno (<dialog>). Otevře ho libovolné tlačítko s atributem
+// data-modal-open="id-okna". Zavírá se křížkem, klávesou Esc nebo kliknutím mimo okno.
+interface Props {
+	id: string;
+	title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<dialog class="modal" id={id} aria-labelledby={`${id}-title`} data-modal>
+	<div class="modal__header">
+		<h2 class="modal__title" id={`${id}-title`}>{title}</h2>
+		<button type="button" class="modal__close" data-modal-close aria-label="Zavřít okno">&times;</button>
+	</div>
+	<div class="modal__body">
+		<slot />
+	</div>
+</dialog>
+
+<script>
+	// Otevírací tlačítka
+	document.querySelectorAll<HTMLElement>('[data-modal-open]').forEach((trigger) => {
+		trigger.addEventListener('click', () => {
+			const dialog = document.getElementById(trigger.dataset.modalOpen ?? '');
+			if (dialog instanceof HTMLDialogElement) dialog.showModal();
+		});
+	});
+
+	document.querySelectorAll<HTMLDialogElement>('[data-modal]').forEach((dialog) => {
+		// Křížek
+		dialog.querySelector('[data-modal-close]')?.addEventListener('click', () => dialog.close());
+
+		// Kliknutí na tmavé pozadí mimo okno
+		dialog.addEventListener('click', (event) => {
+			if (event.target === dialog) dialog.close();
+		});
+	});
+</script>

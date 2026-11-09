@@ -1,0 +1,65 @@
+---
+// Karta jednoho kurzu. Data dostane přes props (objekt kurzu z courses.json).
+// featured={true} přidá modifikátor course-card--featured.
+// Do slotu "footer" lze vložit vlastní tlačítko.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import site from '../data/site.json';
+import Badge from './Badge.astro';
+import { formatPrice } from '../utils/format';
+
+interface Course {
+	slug: string;
+	title: string;
+	category: string;
+	level: string;
+	format: string;
+	duration: number;
+	lessons: number;
+	price: number;
+	image: string;
+	perex: string;
+}
+
+interface Props {
+	course: Course;
+	categoryName: string;
+	featured?: boolean;
+	headingLevel?: 'h2' | 'h3';
+}
+
+const { course, categoryName, featured = false, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+
+// Načteme všechny obrázky ze složky assets a vybereme ten, jehož název je v JSON
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/*.jpg', { eager: true });
+const image = images[`../assets/${course.image}`]?.default;
+
+const levelName = site.levels[course.level as keyof typeof site.levels];
+---
+
+<div class="course-card-wrapper" data-course-category={course.category}>
+	<article class:list={['course-card', { 'course-card--featured': featured }]}>
+		{featured && <Badge variant="accent" class="course-card__ribbon">Doporučujeme</Badge>}
+		{image && <Image src={image} alt="" class="course-card__image" width={640} height={320} />}
+		<div class="course-card__body">
+			<div class="course-card__meta">
+				<Badge variant={course.level as 'beginner' | 'intermediate' | 'advanced'}>{levelName}</Badge>
+				<Badge variant="outline">{categoryName}</Badge>
+			</div>
+			<Heading class="course-card__title">
+				<a class="course-card__link" href={`/kurzy/${course.slug}/`}>{course.title}</a>
+			</Heading>
+			<p class="course-card__perex">{course.perex}</p>
+			<ul class="course-card__info" role="list">
+				<li>{course.lessons} lekcí</li>
+				<li>{course.duration} hodin</li>
+				<li>{course.format}</li>
+			</ul>
+			<div class="course-card__footer">
+				<p class="course-card__price">{formatPrice(course.price)}</p>
+				<slot name="footer" />
+			</div>
+		</div>
+	</article>
+</div>

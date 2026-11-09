@@ -1,0 +1,76 @@
+---
+// Přihláška na kurz s HTML5 validací. Web je statický a nemá server,
+// proto skript po úspěšném odeslání jen zobrazí potvrzení.
+interface Props {
+	courseTitle?: string;
+	idPrefix?: string;
+}
+
+const { courseTitle, idPrefix = 'form' } = Astro.props;
+const id = (name: string) => `${idPrefix}-${name}`;
+---
+
+<form class="form" data-demo-form>
+	<fieldset class="form__fieldset">
+		<legend class="form__legend">Osobní údaje</legend>
+		<div class="form__row">
+			<div class="form__group">
+				<label class="form__label" for={id('name')}>Jméno a příjmení <span class="form__required" aria-hidden="true">*</span></label>
+				<input class="form__input" type="text" id={id('name')} name="name" autocomplete="name" required minlength="3" />
+			</div>
+			<div class="form__group">
+				<label class="form__label" for={id('email')}>E-mail <span class="form__required" aria-hidden="true">*</span></label>
+				<input class="form__input" type="email" id={id('email')} name="email" autocomplete="email" required />
+			</div>
+		</div>
+		<div class="form__group">
+			<label class="form__label" for={id('phone')}>Telefon</label>
+			<input
+				class="form__input"
+				type="tel"
+				id={id('phone')}
+				name="phone"
+				autocomplete="tel"
+				pattern="(\+420 ?)?[0-9]{3} ?[0-9]{3} ?[0-9]{3}"
+				aria-describedby={id('phone-hint')}
+			/>
+			<p class="form__hint" id={id('phone-hint')}>Nepovinné. Formát: 123 456 789 nebo +420 123 456 789.</p>
+		</div>
+	</fieldset>
+
+	<fieldset class="form__fieldset">
+		<legend class="form__legend">Zpráva</legend>
+		{
+			courseTitle && (
+				<div class="form__group">
+					<label class="form__label" for={id('course')}>Kurz</label>
+					<input class="form__input" type="text" id={id('course')} name="course" value={courseTitle} disabled />
+				</div>
+			)
+		}
+		<div class="form__group">
+			<label class="form__label" for={id('message')}>Vaše zpráva</label>
+			<textarea class="form__input form__input--textarea" id={id('message')} name="message" aria-describedby={id('message-hint')} maxlength="500"></textarea>
+			<p class="form__hint" id={id('message-hint')}>Nejvýše 500 znaků.</p>
+		</div>
+		<div class="form__check">
+			<input class="form__checkbox" type="checkbox" id={id('consent')} name="consent" required />
+			<label for={id('consent')}>Souhlasím se zpracováním osobních údajů. <span class="form__required" aria-hidden="true">*</span></label>
+		</div>
+	</fieldset>
+
+	<p class="form__hint">Pole označená <span class="form__required">*</span> jsou povinná.</p>
+	<button type="submit" class="btn btn--primary">Odeslat</button>
+	<p class="form__success" role="status" hidden data-form-success>Děkujeme! Ozveme se vám do dvou pracovních dnů.</p>
+</form>
+
+<script>
+	document.querySelectorAll<HTMLFormElement>('[data-demo-form]').forEach((form) => {
+		form.addEventListener('submit', (event) => {
+			// Sem se dostaneme jen tehdy, když prohlížeč formulář zvalidoval (required, type, pattern)
+			event.preventDefault();
+			form.querySelector<HTMLElement>('[data-form-success]')?.removeAttribute('hidden');
+			form.reset();
+		});
+	});
+</script>

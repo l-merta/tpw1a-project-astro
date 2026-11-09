@@ -1,0 +1,13 @@
+---
+// Malý štítek. Varianta určuje barvu (např. podle úrovně kurzu).
+interface Props {
+	variant?: 'default' | 'beginner' | 'intermediate' | 'advanced' | 'accent' | 'outline';
+	class?: string;
+}
+
+const { variant = 'default', class: className } = Astro.props;
+---
+
+<span class:list={['badge', { [`badge--${variant}`]: variant !== 'default' }, className]}>
+	<slot />
+</span>
